@@ -1,7 +1,7 @@
 import { savedWorks } from './works.js';
 
 
-async function requestWorks() {
+async function requestWorks() {//perche non ho stoccato tutto in una variabile?
     const response = await fetch('http://localhost:5678/api/works/');
     const jsonData = await response.json();
     savedWorks.setWorks(jsonData);
