@@ -1,25 +1,13 @@
-//TODO: 
-//be sure only one modal in the code source
-//call function 1 time each time modal is open
-//click outside of the modal for close
-//made trash button active
-//save and add to the dom the modification
 
-//QUESTION:
-
-// must use assistent tecnology?
-
-
-
+let jsonDataCatModal;
+let recallWorksVar;
 document.getElementById("area-admin").addEventListener('click', function () {
     var openModalBtn = document.getElementById('my-modal')
     openModalBtn.style.display = 'block';
-
     if (openModalBtn.style.display === 'block') {
-        async function recallWorks() { //what i can do for call it just one time?
+        let recallWorksVar = async function recallWorks() { 
             const responseModal = await fetch('http://localhost:5678/api/works/')
             const jsonDataCatModal = await responseModal.json();
-            //if statement for say that modal its alrady been open?
             jsonDataCatModal.forEach(arrayJsonMod => {
                 const showAllPhoto = document.getElementById('gallery-edit')
                 const imgFigureMod = document.createElement('figure')
@@ -27,6 +15,7 @@ document.getElementById("area-admin").addEventListener('click', function () {
                 const trashBtn = document.createElement('div')
                 trashBtn.innerHTML = `<i class="fa-solid fa-trash-can"></i>`
                 trashBtn.classList.add("trash-btn")
+                trashBtn.setAttribute("id", "trash-btn_id")
                 const arrowBtn = document.createElement('div')
                 arrowBtn.innerHTML = `<i class="fa-solid fa-arrows-up-down-left-right"></i>`
                 arrowBtn.classList.add("arrow-btn")
@@ -40,24 +29,48 @@ document.getElementById("area-admin").addEventListener('click', function () {
                 imgFigureMod.appendChild(trashBtn)
                 imgFigureMod.appendChild(arrowBtn)
             })
-
-
-            //addeventl per il bottone creato dinamicamente (trash)
-            //do un id per cancellarlo e reinvio la richiesta ,
-            //o sopprimo il dom dell'id o richiamo recallWarks con le info aggiornate
-
+            document.querySelectorAll(".trash-btn").forEach(trash => {
+                trash.addEventListener("click", function () {
+                    remuoveEleFromDom()
+                })
+            })
+   
         }
         recallWorks()
     }
 })
+
+async function remuoveEleFromDom() {
+    let token = sessionStorage.getItem('reponseLogin')
+    token = JSON.parse(token)
+    console.log(token.userId)
+    let reponseForCancell = await fetch('http://localhost:5678/api/works/${Id}', {
+        method: 'delete',
+        headers: {
+            Authorization: `accept: ${token}`,
+            'Content-Type': "application/json"
+        },
+        body: JSON.parse(token.userId)
+    })
+    const eventRemuve = jsonDataCatModal;
+    console.log(eventRemuve)
+    let parsedReponseCancell = JSON.stringify(reponseForCancell)
+    console.log(reponseForCancell)
+    console.dir(parsedReponseCancell)
+    if (token.userId === 1 && reponseForCancell.status === 400) {
+        const showAllPhoto = document.getElementById('gallery-edit')
+        showAllPhoto.innerHTML = ""
+        
+        
+    }
+}
+
+
 document.getElementById('close-btn').addEventListener('click', function () {
     console.log("cazzimma")
     var openModalBtn = document.getElementById('my-modal');
     openModalBtn.style.display = 'none';
 })
-
-
-
 document.getElementById('close-btn').addEventListener(
     "click",
     function (event) {
