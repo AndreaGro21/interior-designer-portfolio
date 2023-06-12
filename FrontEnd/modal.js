@@ -1,5 +1,3 @@
-//call 1 time the function 
-
 
 document.getElementById("area-admin").addEventListener('click', function () {
     var openModalBtn = document.getElementById('my-modal')
@@ -12,8 +10,9 @@ document.getElementById("area-admin").addEventListener('click', function () {
             jsonDataCatModal.forEach(arrayJsonMod => {
                 const showAllPhoto = document.getElementById('gallery-edit')
                 const imgFigureMod = document.createElement('figure')
+                imgFigureMod.id = arrayJsonMod.id
+                console.log(imgFigureMod)
                 imgFigureMod.classList.add("figure-modal")
-
                 const trashBtn = document.createElement('div')
                 trashBtn.innerHTML = `<i class="fa-solid fa-trash-can"></i>`
                 trashBtn.classList.add("trash-btn")
@@ -30,56 +29,40 @@ document.getElementById("area-admin").addEventListener('click', function () {
                 imgFigureMod.appendChild(titleEdit)
                 imgFigureMod.appendChild(trashBtn)
                 imgFigureMod.appendChild(arrowBtn)
+
             })
             document.querySelectorAll(".trash-btn").forEach(trash => {
                 trash.addEventListener("click", async function () {
-                    const imgFigureModCall = document.querySelector("figure")
-                    imgFigureModCall.setAttribute("data-id", 1)
+                    const imgFigureModCall = trash.closest("figure")
+                    let idNum = imgFigureModCall.id
+                    console.log(idNum)
                     let token = sessionStorage.getItem('reponseLogin')
                     token = JSON.parse(token)
-                    console.log(token.userId)
-                    async function remuoveEleFromDom(elementId) {
-                        const url = `http://localhost:5678/api/works/1`;
-                        try {
-                            const response = await fetch(url, {
-                                method: 'DELETE',
-                                headers: {
-                                    Accept: "*/*",
-                                    "Content-Type": "application/json",
-                                    Authorization: `Bearer ${token}`,
-                                },
-                                body: JSON.stringify({ id: elementId })
-                            });
-                        } catch (error) {
-                            console.error('Error:', error);
+                    let getToken = token.token
+                    try {
+                        const response = await fetch(`http://localhost:5678/api/works/${idNum}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                Authorization: `Bearer ${getToken}`
+                            },
+                        });
+                        if (response.ok) {
+                            imgFigureModCall.remove()
+                        } else {
+                            const errorMessage = `${response.status} - ${response.statusText}`
+                            throw new Error(errorMessage)
                         }
-                        imgFigureModCall.remove()
+
+                    } catch (error) {
+                        console.error('Error:', error);
                     }
-                    remuoveEleFromDom()
+
+
                     console.log(jsonDataCatModal)
-
                 })
+
             })
-            /*   
-             {
-              
-                  let reponseForCancell = await fetch('http://localhost:5678/api/works/${Id}', {
-                      method: 'delete',
-                      headers: {
-                          Authorization: `accept: ${token}`,
-                          'Content-Type': "application/json"
-                      },
-                      body: JSON.parse(token.userId)
-                  })
-                let workEle = target.closest('.figure-modal')
-                  if (token.userId === 1 && reponseForCancell.status === 400) {
-                  workEle.remove()
-                      
-                      
-                  }
-              } */
-
-
         }
         recallWorks()
     }
@@ -99,12 +82,15 @@ document.getElementById('close-btn').addEventListener(
         // If user either clicks X button OR clicks outside the modal window, then close modal by calling closeModal()
         if (
             event.target.matches('close-btn') ||
-            !event.target.closest('.modal')
+            !event.target.closest('modal')
         ) {
             closeModal()
         }
-    },
-    false
+        const imgContainer = document.querySelector('#gallery');
+        imgContainer.innerHTML = '';
+        getworks()
+    }
+  
 )
 
 function closeModal() {
@@ -112,7 +98,34 @@ function closeModal() {
 }
 
 
-//IDEE:
-//per aggiungere una foto dovro fare un push 
-//sull array dato dall api
-//per togilere un elemento dovro contrare a quale img sono e sopprimere quella
+
+document.getElementById("js-add-photo").addEventListener("click", function () {
+
+
+}
+
+)
+
+
+
+function addImg() {
+    const formEle = document.querySelector("#modal2")
+    formEle.addEventListener("submit", a => {
+        a.preventDefault();
+        const dataForm = new FormData(formEle);
+        const data = Object.fromEntries(dataForm);
+
+        const imgLoader = document.querySelector("#image")
+        const imgFile = imgLoader.files[0];
+        data.image = imgFile
+        const postNewImg = {
+            "id": '',
+            "title": data.titre,
+            "imageUrl": data.image,
+            "categoryId": data.category,
+            "userId": 0
+        }
+    })
+
+
+}

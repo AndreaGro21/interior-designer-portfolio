@@ -24,7 +24,6 @@ async function btnCategoryRequest() {
 async function init() {
     await requestWorks()  //vorrei piu spiegazioni su questi 2 e del motivo per cui sono richiamati solo qui
     await btnCategoryRequest()
-   
     document.querySelectorAll('.filterbtn').forEach(categoryButton => {
         categoryButton.addEventListener('click', function () {
             const categoryId = Number(categoryButton.getAttribute('data-id'));
@@ -66,8 +65,6 @@ function createWorksHtml(jsonDataRequest) {
 
 
 
-//funzione recupera item e se presente apri barra admin
-// il problema è che è sempre stoccao nel local storage
 function  adminOpenerByToken (){
  let token = sessionStorage.getItem('reponseLogin')
 token = JSON.parse(token)

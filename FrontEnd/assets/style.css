@@ -325,7 +325,7 @@ text-align: center;
 	margin-right:7px ;
 }
 
-#my-modal{
+#my-modal , #my-modal-upload{
 position: absolute;
 margin:100px  300px;
 background: rgb(255, 255, 255);
@@ -423,6 +423,41 @@ font-style: normal;
 font-weight: 400;
 font-size: 14px;
 }
+/* modal2 */
+#my-modal-upload{
 
+	display: flex;
+	flex-direction: column;
+	padding: 30px;
 
+}
+#modal2{
+	display: flex;
+	flex-direction: column;
+	padding: 0px 100px;
+}
+#modal2 > .file-bg{
 
+	padding:50px 100px;
+	background-color:#E8F1F7 ;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	
+}
+.text-form{
+	
+	padding: .8rem;
+	border-radius: 50px;
+	background-color: #CBD6DC;
+
+}
+
+.return{
+	box-sizing: border-box;
+display: flex;
+justify-content: space-between;
+width: calc(100% - 20px);
+
+}

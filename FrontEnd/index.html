@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
-    <!-- la barra admin è collegata alla modale recuperare il token da local storage per  -->
+    
     <div id="admin-barr">
       <button id="area-admin">
         <i class="fa-solid fa-pen-to-square"></i>Mode édition
@@ -31,12 +31,32 @@
       <div class="modal-content">
         <h2>Galerie photo</h2>
         <div id="gallery-edit"></div>
-        <hr />
+        <hr>
         <div class="button-container">
           <button id="js-add-photo">Ajouter une photo</button>
           <button id="js-delete-button">Supprimer la galerie</button>
         </div>
       </div>
+    </aside>
+    <aside id="my-modal-upload" style="display:none;">
+<div class="return">
+      <i class="fa-solid fa-arrow-left"></i>
+      <div id="close-btn">&times;</div>
+    </div>
+      <form id="modal2"  action="#" method="post">
+        <label for="name">Ajout photo</label>
+        <label class="file-bg" for="image">
+          <i class="fa-regular fa-image"></i>
+          <p class="text-form">+ Ajouter photo</p>
+          <p>jpg, png : 4mo max</p>
+        <input type="file" style="visibility: hidden;" name="file" id="image">
+      </label>
+        <label for="titre">titre</label>
+        <input type="text" name="titre" id="titre" />
+        <label for="category">Categorie</label>
+        <input type="text" name="category" id="category" />
+        <input type="submit" value="valider" />
+      </form>
     </aside>
     <header>
       <h1 href="index.html">
