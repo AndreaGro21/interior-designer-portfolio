@@ -15,7 +15,11 @@ async function btnCategoryRequest() {
         var createButtonCategory = responseJsonCategory.map(indexCategory => {
             return `<button class=filterbtn data-id=${indexCategory.id}>${indexCategory.name}</button>`;
         });
+        var sectionOptionCat = responseJsonCategory.map(indexCategory => {
+            return `<option>${indexCategory.name}</option>`;
+        });
         document.querySelector("#filter").innerHTML = createButtonCategory.join('');
+        document.querySelector("select").innerHTML =JSON.stringify( sectionOptionCat.join(''));
     }
     catch (error) {
         console.error(error);
@@ -24,6 +28,7 @@ async function btnCategoryRequest() {
 async function init() {
     await requestWorks()  //vorrei piu spiegazioni su questi 2 e del motivo per cui sono richiamati solo qui
     await btnCategoryRequest()
+
     document.querySelectorAll('.filterbtn').forEach(categoryButton => {
         categoryButton.addEventListener('click', function () {
             const categoryId = Number(categoryButton.getAttribute('data-id'));

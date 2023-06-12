@@ -79,33 +79,40 @@ document.getElementById('close-btn').addEventListener('click', function () {
 document.getElementById('close-btn').addEventListener(
     "click",
     function (event) {
-        // If user either clicks X button OR clicks outside the modal window, then close modal by calling closeModal()
+
         if (
             event.target.matches('close-btn') ||
-            !event.target.closest('modal')
+            !event.target.closest("aside")
         ) {
             closeModal()
         }
-        const imgContainer = document.querySelector('#gallery');
-        imgContainer.innerHTML = '';
-        getworks()
+
+        async function callToChange() {
+            const responseModal = await fetch('http://localhost:5678/api/works/')
+            const jsonDataCatModal = await responseModal.json();
+            console.log(jsonDataCatModal)
+            jsonDataCatModal.forEach(arrayJson => {
+                const imgContainer = document.querySelector("#gallery");
+                const imgFigure = document.createElement('figure');
+                const imgElement = document.createElement('img');
+                const titleImg = document.createElement("p")
+                titleImg.textContent = arrayJson.title;
+                imgElement.src = arrayJson.imageUrl;
+                imgContainer.appendChild(imgFigure);
+                imgFigure.appendChild(imgElement);
+                imgFigure.appendChild(titleImg);
+            })
+
+
+        }
+        callToChange()
     }
-  
+
 )
 
 function closeModal() {
-    document.querySelector("#my-modal").style.display = "none"
+    /*   document.querySelector("#my-modal").style.display = "none" */
 }
-
-
-
-document.getElementById("js-add-photo").addEventListener("click", function () {
-
-
-}
-
-)
-
 
 
 function addImg() {
@@ -114,18 +121,32 @@ function addImg() {
         a.preventDefault();
         const dataForm = new FormData(formEle);
         const data = Object.fromEntries(dataForm);
-
         const imgLoader = document.querySelector("#image")
         const imgFile = imgLoader.files[0];
         data.image = imgFile
         const postNewImg = {
-            "id": '',
-            "title": data.titre,
             "imageUrl": data.image,
+            "title": data.titre,
             "categoryId": data.category,
-            "userId": 0
         }
+        let token = sessionStorage.getItem('reponseLogin')
+        token = JSON.parse(token)
+        let getToken = token.token;
+        async function pushNewImg() {
+            try {
+                const response = await fetch("http://localhost:5678/api/works/", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        Authorization: `Bearer ${getToken}`
+                    },
+                    body: dataForm
+                });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        pushNewImg()
     })
-
-
 }
+addImg()
