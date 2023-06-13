@@ -79,14 +79,12 @@ document.getElementById('close-btn').addEventListener('click', function () {
 document.getElementById('close-btn').addEventListener(
     "click",
     function (event) {
-
         if (
             event.target.matches('close-btn') ||
             !event.target.closest("aside")
         ) {
             closeModal()
         }
-
         async function callToChange() {
             const responseModal = await fetch('http://localhost:5678/api/works/')
             const jsonDataCatModal = await responseModal.json();
@@ -102,21 +100,55 @@ document.getElementById('close-btn').addEventListener(
                 imgFigure.appendChild(imgElement);
                 imgFigure.appendChild(titleImg);
             })
-
-
         }
         callToChange()
     }
-
 )
 
-function addImg() {
-    const formEle = document.querySelector("#modal2")
+    const formEle = document.getElementById("modal2")
     formEle.addEventListener("submit", a => {
         a.preventDefault();
-        const dataForm = new FormData(formEle );
+        const dataForm = new FormData();
+        let image = document.getElementById("image").files[0]
+        console.log(image)
+        let title = document.getElementById("title").value
+        console.log(title)
+        let category = document.querySelector("#category").value
+        console.log(category)
+        dataForm.append("image", image)
+        dataForm.append("title", title)
+        dataForm.append("category", category)
+        console.log(dataForm)
+        let token = sessionStorage.getItem("accessToken")
+        console.log(token)
+        async function sendImg() {
+            try {
+                let reponse = await fetch("http://localhost:5678/api/works", {
+                    method: 'POST',
+                    headers: {
+                         /* 'Content-Type': 'multipart/form-data', */
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: dataForm
+                });
+                console.log(reponse)
+                if (reponse.ok) {
+                    console.log("good")
+                } else {
+                    const errorMessage = `${reponse.status} - ${reponse.statusText}`
+                    console.log(errorMessage)
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    
+        sendImg( )
+    })
 
-        /*     const data = Object.fromEntries(dataForm);
+
+
+/*     const data = Object.fromEntries(dataForm);
         const imgLoader = document.querySelector("#image")
             const imgFile = imgLoader.files[0];
             data.image = imgFile;
@@ -126,35 +158,3 @@ function addImg() {
                 "categoryId": data.category,
             }
             console.log(postNewImg) */
-
-            var image = document.getElementById("image").files[0]
-            console.log(image)
-            var title = document.getElementById("title").value
-            console.log(title)
-            var category = document.querySelector("#category").value
-            console.log(category)
-        dataForm.append("file", image)
-        dataForm.append("title", title)
-        dataForm.append("categoryId", category)
-        console.log(dataForm)
-        let token = sessionStorage.getItem('reponseLogin')
-        token = JSON.parse(token)
-        let getToken = token.token;
-        
-            try {
-                fetch("http://localhost:5678/api/works/", {
-                    method: 'POST',
-                    headers: {
-                       /*  'Content-Type': 'multipart/form-data', */
-                        Authorization: `Bearer ${getToken}`,
-                    },
-                    body: dataForm,
-                });
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        
-       
-    })
-}
-addImg()

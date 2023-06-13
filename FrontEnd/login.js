@@ -24,7 +24,7 @@ async function openAdminTools(event) {
     else {
         const reponseLogin = await response.json();
 
-        sessionStorage.setItem("reponseLogin", JSON.stringify(reponseLogin))
+        sessionStorage.setItem("accessToken", reponseLogin.token)
         window.location.href = window.location.origin + '/index.html';
 
     }
