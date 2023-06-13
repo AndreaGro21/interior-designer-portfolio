@@ -119,28 +119,39 @@ function addImg() {
     const formEle = document.querySelector("#modal2")
     formEle.addEventListener("submit", a => {
         a.preventDefault();
-        const dataForm = new FormData(formEle);
-        const data = Object.fromEntries(dataForm);
-        const imgLoader = document.querySelector("#image")
-        const imgFile = imgLoader.files[0];
-        data.image = imgFile
-        const postNewImg = {
-            "imageUrl": data.image,
-            "title": data.titre,
-            "categoryId": data.category,
-        }
+        const dataForm = new FormData( );
+       
+
+        /*     const data = Object.fromEntries(dataForm);
+         const imgLoader = document.querySelector("#image")
+            const imgFile = imgLoader.files[0];
+            data.image = imgFile;
+            let  postNewImg = {
+                "imageUrl": data.image,
+                "title": data.title,
+                "categoryId": data.category,
+            }
+            console.log(postNewImg) */
+
+            var image = document.getElementById("image").files[0]
+            var title = document.getElementById("title").value
+            var category = document.getElementById(category)
+        dataForm.append('file', image)
+        dataForm.append("title", title,)
+        dataForm.append("categoryId", category,)
+        console.log(dataForm)
         let token = sessionStorage.getItem('reponseLogin')
         token = JSON.parse(token)
         let getToken = token.token;
         async function pushNewImg() {
             try {
-                const response = await fetch("http://localhost:5678/api/works/", {
+                await fetch("http://localhost:5678/api/works", {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'multipart/form-data',
-                        Authorization: `Bearer ${getToken}`
+                       /*  'Content-Type': 'multipart/form-data', */
+                        Authorization: `Bearer ${getToken}`,
                     },
-                    body: dataForm
+                    body: dataForm,
                 });
             } catch (error) {
                 console.error('Error:', error);
