@@ -181,17 +181,7 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
-	cursor: pointer;
-}
+
 /* LOGIN PAGE */
 footer{
 	display: flex;
@@ -277,7 +267,7 @@ position: relative;
 }
 
 /* ADMIN NAV */
-.cazzo{
+.admin-barr_controller{
 	display: none;
 }
 
@@ -287,7 +277,10 @@ position: relative;
     left:0;
     right:0;
 	top: 0;
+	display: flex;
+	align-items: center;
 	justify-content: center;
+	flex-direction: row;
 	
 }
 .display-it{
@@ -320,14 +313,15 @@ line-height: 19px;
 text-align: center;
 	background: none;
 	color:white;
+	
 }
 #area-admin > i{
 	margin-right:7px ;
 }
 
+/* MODAL 1 & 2 */
 #my-modal , #my-modal-upload{
 position: absolute;
-margin:100px  300px;
 background: rgb(255, 255, 255);
 padding: 4px;
 display: flex;
@@ -335,26 +329,57 @@ justify-content: center;
 align-items: center;
 border-radius: 10px;
 border: 0.5px solid black;
+margin-left: 10%;
+margin-top: 45%;
+width: auto;
+}
+#modal2{
+	padding: 1rem 6rem;
+}
+
+.close-btn{
+	position: relative;
+	left: 95%;
+	top: 5px;
+	font-size: 18px;
+}
+.close-btn-modal2 , #arrow-modal{
+text-transform: capitalize;
+	font-size: 17.5px;
 }
 #gallery-edit{
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	padding: 5px;
+box-sizing: border-box;
+padding: 50px;
+	
 }
 .figure-modal{
+	position: relative;
+	width: 90px;
+	height: 130px;
 object-fit: cover;
+padding: 5px;
 }
+.figure-modal > img{
+	
+	width: 100%;
+
+	}
 .trash-btn{
+	box-sizing: content-box;
 	cursor: pointer;
 	color: white;
 	background: black;
 	padding: 6px;
 	border-radius: 5px;
 width: 12px;
-position: relative;
-bottom:145px;
-right: -70px;
+position:absolute;
+left: 65%;
+top: 8%;
+
+
 }
 .arrow-btn{
 	display: none;
@@ -368,16 +393,16 @@ right: -70px;
 	border-radius: 5px;
 width: 12px;
 position: relative;
-bottom:171px;
-right: -40px;
-}
-.figure-modal > img{
+position:absolute;
+left: 38%;
+top: 8%;
 
-	width: 100px;
 }
+
 .modal-content{
-	width: 630px;
-	height: 731px;
+	position: relative;
+	width: auto;
+	height: auto;
 }
 
 .modal-content > h2 {
@@ -389,29 +414,36 @@ line-height: 30px;
 text-align: center;
 color: black;
 }
+.bar{
+	width: 80%
+}
 hr{
-	width: 90%;
+	position: relative;
+	width: 100%;
     height: 0.1px;
     background: #333;
     
 }
 
 .button-container{
+	position: relative;
 	display: flex;
 	flex-direction: column;
 align-items: center;
+margin-bottom: 10px;
+
+
 }
 #js-add-photo{
 	font-family: 'Syne';
-	font-style: normal;
 	font-weight: 700;
-	font-size: 14px;
 	color: white;
-	background:#1D6154 ;
-	padding: 3px;
-	border-radius: 60px;
-	width: 200px;
-	margin-bottom: 5px;
+	background-color: #1D6154;
+	margin : 1em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+	cursor: pointer;
 }
 
 #js-delete-button{
@@ -424,40 +456,84 @@ font-weight: 400;
 font-size: 14px;
 }
 /* modal2 */
-#my-modal-upload{
 
-	display: flex;
-	flex-direction: column;
-	padding: 30px;
-
-}
 #modal2{
 	display: flex;
 	flex-direction: column;
-	padding: 0px 100px;
+	
 }
-#modal2 > .file-bg{
-
-	padding:50px 100px;
+.file-bg{
+	padding:20px 100px;
 	background-color:#E8F1F7 ;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	
+}
+.file-bg > i {
+font-size: 50px;
+
+}
+
+#form-title{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 26px;
+	line-height: 30px;
+	text-align: center;
+	color: #000000;
+	margin: 15px 0;
 }
 .text-form{
-	
-	padding: .8rem;
+	padding:.5rem 1.6rem;
 	border-radius: 50px;
 	background-color: #CBD6DC;
-
+margin: 10px 0;
+}
+.text-label{
+	font-size: 10px;
 }
 
-.return{
+.text-css{
+margin: 10px 0;
+}
+
+#title , #category{
+	background: #FFFFFF;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	border: none;
+	height: 30px;
+}
+
+#category{
+	margin-bottom: 50px;
+}
+.btn-submit{
+	background: #A7A7A7;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+	cursor: pointer;
+	padding:.5rem 1.6rem;
+	border: 0.2px solid ;
+}
+
+
+
+.return-Btn{
 	box-sizing: border-box;
 display: flex;
 justify-content: space-between;
 width: calc(100% - 20px);
 
+}
+
+#prev-img{
+	width: 60px;
+	height: auto;
 }
