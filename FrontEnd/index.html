@@ -18,7 +18,7 @@
 
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
-  <body>
+  <body class="de">
     <div id="admin-barr">
       <button id="area-admin">
         <i class="fa-solid fa-pen-to-square"></i>
@@ -26,6 +26,7 @@
       </button>
       <button id="publish-changes">publier les changements</button>
     </div>
+    <div id="overlay" style="display: none">
     <aside id="my-modal" class="modal" style="display: none">
       <span class="close-btn">&times;</span>
       <div class="modal-content">
@@ -38,11 +39,16 @@
         </div>
       </div>
     </aside>
+  </div>
+  <div id="overlay2" style="display: none">
     <aside id="my-modal-upload" style="display: none">
       <div class="return-Btn">
         <i class="fa-solid fa-arrow-left" id="arrow-modal"></i>
         <div class="close-btn-modal2">&times;</div>
       </div>
+ 
+    
+
       <form id="modal2" action="#" method="post">
         <label id="form-title" for="name">Ajout photo</label>
         <label class="file-bg" for="image">
@@ -63,8 +69,9 @@
         <label class="text-css" for="category">Categorie</label>
         <select type="select" name="category" id="category" required></select>
         <hr />
-        <input class="btn-submit" type="submit" value="valider" />
+        <input id ="btn-submit" type="submit" value="valider">
       </form>
+    </div>
     </aside>
     <header>
       <h1 href="index.html">
@@ -84,9 +91,13 @@
     <main>
       <section id="introduction">
         <figure>
-          <img src="./assets/images/sophie-bluel.png" alt="" />
+          <img src="./assets/images/sophie-bluel.png" alt="photo of Sophie" />
+          
+          <br>
+          <div class="edit" id="edit-img" style="display: none;"><i class="fa-sharp fa-regular fa-pen-to-square" > <span>modifier</span></i></div>
         </figure>
         <article>
+          <div class="edit" id="edit-title" style="display: none;"><i class="fa-sharp fa-regular fa-pen-to-square"> <span>modifier</span></i></div>
           <h2>Designer d'espace</h2>
           <p>
             Je raconte votre histoire, je valorise vos idées. Je vous accompagne
@@ -106,7 +117,7 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <h2>Mes Projets <span  class="edit" id="edit-title-gallery" style="display: none;"><i class= " fa-sharp fa-regular fa-pen-to-square"> <span>modifier</span></i></span></h2>
         <div id="filter"></div>
         <div id="gallery"></div>
       </section>

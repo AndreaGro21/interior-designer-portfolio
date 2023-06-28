@@ -1,5 +1,4 @@
-
-
+import { login } from "./api.js";
 
 async function openAdminTools(event) {
     event.preventDefault();
@@ -9,27 +8,11 @@ async function openAdminTools(event) {
         email: email,
         password: password
     }
-    let response = await fetch('http://localhost:5678/api/users/login', {
-        method: 'post',
-        headers: {
-            'Content-Type': "application/json"
-        },
-        body: JSON.stringify(dataLogin)
+    const response = await login(dataLogin).catch((error) => {
+        alert(error.message)
     })
-    if (!response.ok) {
-        alert("Email or password incorrect");
-        return
-    }
-
-    else {
-        const reponseLogin = await response.json();
-
-        sessionStorage.setItem("accessToken", reponseLogin.token)
-        window.location.href = window.location.origin + '/index.html';
-
-    }
-
-
+    sessionStorage.setItem("accessToken", response.token)
+    window.location.href = window.location.origin + '/index.html';
 }
 
 

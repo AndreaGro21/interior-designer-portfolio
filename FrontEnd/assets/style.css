@@ -31,15 +31,18 @@ footer, header, hgroup, menu, nav, section {
 }
 html{
 	height: 100%;
+	
 }
 body {
 	line-height: 1;
 	background: #FFFEF8;
     max-width: 1140px;
+	max-height: 3326px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
-	height: 100%;
+	
+	
 }
 ol, ul  {
 	list-style: none;
@@ -85,7 +88,6 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
@@ -166,6 +168,18 @@ margin: auto;
 	display: flex;
 	flex-direction: column;
 }
+input[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+}
+
+
 
 #contact input {
 	height: 50px;
@@ -191,7 +205,7 @@ footer{
 
 
 footer nav ul {
-	position: relative;
+	
 	display: flex;
 	justify-content: flex-end;
 	top: 430px;
@@ -270,6 +284,21 @@ position: relative;
 .admin-barr_controller{
 	display: none;
 }
+figure > .edit{
+	margin: 0 57px
+}
+
+.edit{
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+	
+	color: #000000;
+}
+i > span{
+	font-family: 'Work Sans';
+}
 
 #admin-barr{
 	background: black;
@@ -277,11 +306,7 @@ position: relative;
     left:0;
     right:0;
 	top: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: row;
-	
+	text-align: center;
 }
 .display-it{
 	display: block;
@@ -320,17 +345,28 @@ text-align: center;
 }
 
 /* MODAL 1 & 2 */
+
+#overlay , #overlay2{
+	position:absolute;
+	background: rgba(0, 0, 0, 0.623);
+display: flex;
+align-items: center;
+justify-content: center;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+height: 240vh;
+		width:100vw;
+	
+}
 #my-modal , #my-modal-upload{
 position: absolute;
+transform: translateY(-100%);
 background: rgb(255, 255, 255);
 padding: 4px;
-display: flex;
-justify-content: center;
-align-items: center;
 border-radius: 10px;
 border: 0.5px solid black;
-margin-left: 10%;
-margin-top: 45%;
 width: auto;
 }
 #modal2{
@@ -342,11 +378,18 @@ width: auto;
 	left: 95%;
 	top: 5px;
 	font-size: 18px;
+	cursor: pointer;
 }
 .close-btn-modal2 , #arrow-modal{
-text-transform: capitalize;
 	font-size: 17.5px;
+	cursor: pointer;
+	padding: 10px;
 }
+.close-btn-modal2 {
+	font-size: 23px;
+}
+
+
 #gallery-edit{
 	width: 100%;
 	display: grid;
@@ -355,6 +398,8 @@ box-sizing: border-box;
 padding: 50px;
 	
 }
+
+
 .figure-modal{
 	position: relative;
 	width: 90px;
@@ -443,7 +488,7 @@ margin-bottom: 10px;
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
-	cursor: pointer;
+	padding:.5rem 0;
 }
 
 #js-delete-button{
@@ -509,7 +554,7 @@ margin: 10px 0;
 #category{
 	margin-bottom: 50px;
 }
-.btn-submit{
+#btn-submit{
 	background: #A7A7A7;
 	font-family: 'Syne';
 	font-weight: 700;
@@ -525,6 +570,8 @@ margin: 10px 0;
 
 
 
+
+
 .return-Btn{
 	box-sizing: border-box;
 display: flex;
@@ -536,4 +583,10 @@ width: calc(100% - 20px);
 #prev-img{
 	width: 60px;
 	height: auto;
+}
+
+
+.cazz{
+	color: red;
+	background: green;
 }

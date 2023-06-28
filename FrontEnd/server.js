@@ -1,2 +1,2 @@
-import {} from "./gallery.js"
+import "./index.js"
 
