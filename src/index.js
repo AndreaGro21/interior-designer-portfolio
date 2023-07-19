@@ -191,6 +191,12 @@ formEle.addEventListener("submit",async a => {
     dataForm.append("category", category)
     await importNewWork(dataForm)
     showGallery(savedWorks.getWorks());
+
+document.getElementById("modal2").reset();
+document.getElementById("prev-img").style.display = "none";
+remuveIcone.style.display = "block";
+activeBtnSub.style.background = "#A7A7A7";
+
 })
 //PREVIEW IMG IN MODAL2
 image.onchange = () => {
@@ -201,4 +207,6 @@ image.onchange = () => {
         prevImg.src = URL.createObjectURL(file)
         activeBtnSub.style.background = "#1D6154"
     }
+
 }
+

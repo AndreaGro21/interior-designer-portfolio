@@ -347,7 +347,7 @@ text-align: center;
 /* MODAL 1 & 2 */
 
 #overlay , #overlay2{
-	position:absolute;
+	position:fixed;
 	background: rgba(0, 0, 0, 0.623);
 display: flex;
 align-items: center;
