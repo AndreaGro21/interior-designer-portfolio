@@ -12,7 +12,9 @@ async function openAdminTools(event) {
         alert(error.message)
     })
     sessionStorage.setItem("accessToken", response.token)
-    window.location.href = window.location.origin + '/index.html';
+  //  window.location.href = window.location.origin + '/index.html';
+  window.location.href =  './index.html';
+    //window.location = './index.html';
 }
 
 

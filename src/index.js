@@ -94,6 +94,7 @@ async function openModal() {
     openModalBtn.style.display = 'block';
     shadowModal.style.display = 'flex';
     shadowModal2.style.display = 'none';
+    document.getElementById("filter").style.display = "none"
     if (!elementsShow) {
         const jsonDataCatModal = await requestWorks();
         jsonDataCatModal.forEach(arrayJsonMod => {
@@ -120,15 +121,19 @@ async function openModal() {
         })
         //DELETE for TRASH BTN
         document.querySelectorAll(".trash-btn").forEach(trash => {
-            trash.addEventListener("click", async function () {
+            trash.addEventListener("click", async event => {
+                //event.preventDefault();
+                //event.stopPropagation();
                 const imgFigureModCall = trash.closest("figure")
                 let idNum = imgFigureModCall.id
                 await deleteWork(idNum).catch((error) => {
                     alert(error.message)
                 })
                 imgFigureModCall.remove()
+                
                 imgContainer.innerHTML = '';
                 showGallery(savedWorks.getWorks())
+                //return false;
             })
         })
     }
@@ -169,6 +174,7 @@ function closeModals(event) {
     ) {
         openModalBtn.style.display = 'none';
         shadowModal.style.display = 'none';
+        document.getElementById("filter").style.display = "flex"
         imgContainer.innerHTML = '';
         showGallery(savedWorks.getWorks());
     }
@@ -184,9 +190,7 @@ formEle.addEventListener("submit",async a => {
     dataForm.append("title", title)
     dataForm.append("category", category)
     await importNewWork(dataForm)
-    
     showGallery(savedWorks.getWorks());
-   
 })
 //PREVIEW IMG IN MODAL2
 image.onchange = () => {
